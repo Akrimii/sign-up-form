@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+<style>
+    html,body {
+        height: 100%;
+        width:100%;
+        font-family: "Poppins";
+    }
+    body {
+        text-align: center;
+        height: 100%;
+        width:100%;
+        background-image: url(media/form_background.jpg) ;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+
+    h1{
+        font-size: 40px;
+    }
+
+    input {
+        width: 400px;
+        height: 30px;
+    }
+
+    #submit {
+        margin-top: 50px;
+        font-weight: bold;
+        background-color: transparent;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #submit:hover {
+        box-shadow: inset 0px 1px 8px 0px rgba(0,0,0,0.5);
+    }
+</style>
+
+    <h1>Sign Up</h1>
+    <form method="post" class="newEntry">
+
+        <label for="firstName">First Name</label><br>
+        <input type="text" id="firstName" maxlength="20" placeholder="John" required><br>
+
+        <label for="lastName">Last Name</label><br>
+        <input type="text" id="lastName" maxlength="20" placeholder="Smith" required><br>
+
+        <label for="phoneNumber">Phone Number</label><br>
+        <input type="tel" id="phoneNumber" pattern="01\d{1}-\d{7,8}" placeholder="012-3456789" required><br>
+
+        <label for="dob">Date of Birth</label><br>
+        <input type="date" id="dob"><br>
+
+        <label for="emailAddress">Email</label><br>
+        <input type="email" id="emailAddress" pattern="^\w+@(\w+\.)?\w+\.(com|edu|gov)$"
+        placeholder="john_smith@gmail.com"  required><br>
+
+        <label for="password1">Password</label><br>
+        <input type="password" id="password1" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,14}$" placeholder="********" 
+        title="A password of 8-14 characters in length, with at least one uppercase, one lowercase, and one number."><br>
+
+        <label for="password2">Reenter Password</label><br>
+        <input type="password" id="password2" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" placeholder="********" required><br>
+
+        <input type="submit" id="submit" value="Sign Up">
+
+    </form>
+
+<script>
+    const newEntry=document.querySelector('.newEntry');
+    const newEntryList=JSON.parse(localStorage.getItem('newEntryList')) || [];
+    const password1=document.querySelector('#password1');
+    const password2=document.querySelector('#password2');
+
+    function addData(e) {
+        e.preventDefault();
+        const firstName=this.querySelector('#firstName').value;
+        const lastName=this.querySelector('#lastName').value;
+        const phoneNumber=this.querySelector('#phoneNumber').value;
+        const dob=this.querySelector('#dob').value;
+        const emailAddress=this.querySelector('#emailAddress').value;
+        const password=this.querySelector('#password1').value;
+        const details= {
+            firstName,
+            lastName,
+            phoneNumber,
+            emailAddress,
+            password,
+        }
+        console.log(details)
+        newEntryList.push(details);
+        localStorage.setItem('newEntryList',JSON.stringify(newEntryList));
+        this.reset();
+    }
+
+    function checkPassword1() {
+        console.log(this.value);
+    }
+
+    function checkPassword2() {
+        console.log(this.value);
+    }
+
+    newEntry.addEventListener('submit',addData);
+
+    password1.addEventListener('change',checkPassword1);
+
+    password2.addEventListener('keyup',checkPassword2)
+</script>
+
+<!-- how to verify password1 is the same as password2 before submitting the form -->
+
+
+    
+</body>
+</html>
