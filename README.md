@@ -1,5 +1,4 @@
 # sign-up-form
-form with multiple verification methods including regex
+-form with verification methods listed (required, maxlength, regex pattern (for phone number, email, and password)
 
-
-project assignment link: https://www.theodinproject.com/lessons/node-path-intermediate-html-and-css-sign-up-form
+-project assignment link: https://www.theodinproject.com/lessons/node-path-intermediate-html-and-css-sign-up-form
